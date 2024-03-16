@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import styles from "./Game.module.css";
 import BlockImage from "../Sprites/Block.png";
 import PlayerImage from "../Sprites/Player.png";
+import EnemyImage from "../Sprites/Enemy.png";
 
 function Game() {
     const [playerPosition, setPlayerPosition] = useState({ x: 0, y: 0 });
     const [blocks, setBlocks] = useState([]);
+    const [enemies, setEnemies] = useState([]);
 
-    // Sample block positions
     useEffect(() => {
-        // Update with actual block positions
-        const Blocks = [
+        const enemies = [
             { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
             { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
             { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
@@ -20,7 +20,22 @@ function Game() {
             { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
             { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
         ];
-        setBlocks(Blocks);
+        setEnemies(enemies);
+    }, []);
+
+    useEffect(() => {
+        // Update with actual block positions
+        const blocks = [
+            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
+            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
+            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
+            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
+            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
+            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
+            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
+            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
+        ];
+        setBlocks(blocks);
     }, []);
 
     useEffect(() => {
@@ -78,6 +93,15 @@ function Game() {
                     alt={`Block-${index}`}
                     className={styles.BlockImage}
                     style={{ top: `${block.y * 50}px`, left: `${block.x * 50}px` }}
+                />
+            ))}
+            {enemies.map((enemy, index) => ( // Added return here
+                <img
+                    key={index}
+                    src={EnemyImage}
+                    alt={`Enemy-${index}`}
+                    className={styles.EnemyImage}
+                    style={{ top: `${enemy.y * 50}px`, left: `${enemy.x * 50}px` }}
                 />
             ))}
             <img
