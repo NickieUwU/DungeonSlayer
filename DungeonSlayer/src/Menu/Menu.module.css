@@ -1,0 +1,15 @@
+.MenuDiv
+{
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    border: 1px solid black;
+    position: absolute;
+    left: 45%;
+}
+
+button
+{
+    background-color: blue;
+    border: transparent;
+}
