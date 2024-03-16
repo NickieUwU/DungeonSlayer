@@ -88,10 +88,10 @@ function Game() {
             if(playerState === PlayerAttackImage)
             {
                 enemies.pop((enemy) => enemy.x === roundedPlayerPosition.x &&  enemy.y === roundedPlayerPosition.y);
-                setKills(kills++);
+                setKills((prevKills) => prevKills + 1);
                 if(enemies == "")
                 {
-                    setLevel(level++);
+                    setLevel((prevLevel) => prevLevel + 1);
                 }
             }
             else
@@ -99,6 +99,7 @@ function Game() {
                 location.reload();
             }
         }
+        console.log(level+" "+kills);
         }
     };
     return (
