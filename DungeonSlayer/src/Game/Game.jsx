@@ -76,7 +76,7 @@ function Game() {
                     return enemy;
                 });
             });
-        }, 500); // Adjust the interval as needed
+        }, 400); // Adjust the interval as needed
 
         return () => clearInterval(interval);
     }, [playerPosition]); // Dependency array includes playerPosition
@@ -84,9 +84,9 @@ function Game() {
     const attemptMovePlayer = (newPosition) => {
         if (
             newPosition.x >= 0 &&
-            newPosition.y >= 0 &&
-            newPosition.x < 15 && // Adjust this based on your game's width
-            newPosition.y < 15 // Adjust this based on your game's height
+            newPosition.y >= 1 &&
+            newPosition.x < 20 && // Adjust this based on your game's width
+            newPosition.y < 20 // Adjust this based on your game's height
         ) {
             const roundedPlayerPosition = { x: Math.round(newPosition.x), y: Math.round(newPosition.y) };
             const isColliding = blocks.some((block) => block.x === roundedPlayerPosition.x && block.y === roundedPlayerPosition.y);
@@ -107,6 +107,7 @@ function Game() {
                 else 
                 {
                     setLevel(1);
+                    setKills(0);
                 }
             }
         }
