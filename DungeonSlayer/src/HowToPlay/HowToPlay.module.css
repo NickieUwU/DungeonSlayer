@@ -1,4 +1,9 @@
 .FullHowToPlay
 {
+    width: fit-content;
+    height: fit-content;
+    overflow: auto;
     border: 1px solid black;
+    position: absolute;
+    left: 40%;
 }
