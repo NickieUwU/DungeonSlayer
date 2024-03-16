@@ -3,13 +3,19 @@
     position: absolute;
     width: fit-content;
     height: fit-content;
-    border: 1px solid black;
     position: absolute;
     left: 45%;
 }
 
-button
+.btnMenu
 {
     background-color: blue;
     border: transparent;
+}
+
+.NavMenu
+{
+   position: absolute;
+   left: 45%;
+   top: 45%;
 }
