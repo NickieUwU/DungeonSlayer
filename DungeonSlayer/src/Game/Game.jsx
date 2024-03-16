@@ -3,20 +3,16 @@ import styles from "./Game.module.css";
 import BlockImage from "../Sprites/Block.png";
 import PlayerImage from "../Sprites/Player.png";
 import EnemyImage from "../Sprites/Enemy.png";
+import PlayerAttackImage from "../Sprites/PlayerAttackImage.png"
 
 function Game() {
     const [playerPosition, setPlayerPosition] = useState({ x: 0, y: 0 });
     const [blocks, setBlocks] = useState([]);
     const [enemies, setEnemies] = useState([]);
+    const [playerState, setPlayerState] = useState(PlayerImage);
 
     useEffect(() => {
         const enemies = [
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
             { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
             { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
         ];
@@ -44,18 +40,22 @@ function Game() {
             switch (event.key) {
                 case 'ArrowUp':
                     attemptMovePlayer({ x: playerPosition.x, y: playerPosition.y - 1 });
-                    break;
+                break;
                 case 'ArrowDown':
                     attemptMovePlayer({ x: playerPosition.x, y: playerPosition.y + 1 });
-                    break;
+                break;
                 case 'ArrowLeft':
                     attemptMovePlayer({ x: playerPosition.x - 1, y: playerPosition.y });
-                    break;
+                break;
                 case 'ArrowRight':
                     attemptMovePlayer({ x: playerPosition.x + 1, y: playerPosition.y });
-                    break;
+                break;
+                case 'a':
+                    setPlayerState(PlayerAttackImage);
+                    setTimeout(() => setPlayerState(PlayerImage), 1000); // Revert to original sprite after 1 second
+                break;
                 default:
-                    break;
+                break;
             }
         };
 
@@ -81,6 +81,18 @@ function Game() {
                 // If no collision, update player position
                 setPlayerPosition(newPosition);
             }
+            const EnemyCollision = enemies.some((enemy) => enemy.x === roundedPlayerPosition.x &&  enemy.y === roundedPlayerPosition.y);
+        if(EnemyCollision)
+        {
+            if(playerState === PlayerAttackImage)
+            {
+                enemies.pop((enemy) => enemy.x === roundedPlayerPosition.x &&  enemy.y === roundedPlayerPosition.y);
+            }
+            else
+            {
+                location.reload();
+            }
+        }
         }
     };
 
@@ -105,7 +117,7 @@ function Game() {
                 />
             ))}
             <img
-                src={PlayerImage}
+                src={playerState}
                 alt="Player"
                 className={styles.PlayerImage}
                 style={{ top: `${playerPosition.y * 50}px`, left: `${playerPosition.x * 50}px` }}
