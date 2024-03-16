@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useImperativeHandle } from "react";
 import styles from "./Game.module.css";
 import BlockImage from "../Sprites/Block.png";
 import PlayerImage from "../Sprites/Player.png";
@@ -6,11 +6,12 @@ import EnemyImage from "../Sprites/Enemy.png";
 import PlayerAttackImage from "../Sprites/PlayerAttackImage.png"
 
 function Game() {
+    let [level, setLevel] = useState(1);
+    let [kills, setKills] = useState(0);
     const [playerPosition, setPlayerPosition] = useState({ x: 0, y: 0 });
     const [blocks, setBlocks] = useState([]);
     const [enemies, setEnemies] = useState([]);
     const [playerState, setPlayerState] = useState(PlayerImage);
-
     useEffect(() => {
         const enemies = [
             { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
@@ -22,14 +23,14 @@ function Game() {
     useEffect(() => {
         // Update with actual block positions
         const blocks = [
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
-            { x: Math.floor(Math.random() * 10), y: Math.floor(Math.random() * 10) },
+            { x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 15) },
+            { x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 15) },
+            { x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 15) },
+            { x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 15) },
+            { x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 15) },
+            { x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 15) },
+            { x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 15) },
+            { x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 15) },
         ];
         setBlocks(blocks);
     }, []);
@@ -87,6 +88,11 @@ function Game() {
             if(playerState === PlayerAttackImage)
             {
                 enemies.pop((enemy) => enemy.x === roundedPlayerPosition.x &&  enemy.y === roundedPlayerPosition.y);
+                setKills(kills++);
+                if(enemies == "")
+                {
+                    setLevel(level++);
+                }
             }
             else
             {
@@ -95,7 +101,6 @@ function Game() {
         }
         }
     };
-
     return (
         <>
             {blocks.map((block, index) => (
@@ -125,5 +130,4 @@ function Game() {
         </>
     );
 }
-
 export default Game;
