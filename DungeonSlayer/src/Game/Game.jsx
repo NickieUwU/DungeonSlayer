@@ -14,7 +14,7 @@ function Game() {
     const [playerState, setPlayerState] = useState(PlayerImage);
 
     useEffect(() => {
-        const newBlocks = Array.from({ length: 8 }, () => ({
+        const newBlocks = Array.from({ length: kills }, () => ({
             x: Math.floor(Math.random() * 15),
             y: Math.floor(Math.random() * 15)
         }));
