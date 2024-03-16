@@ -17,7 +17,7 @@ function HowToPlay()
                             Movement   
                         </h3><br/>
                         <span className={styles.GuideText}>
-                            Use the arrow keys or WASD to move your character.
+                            Use the arrow keys to move your character.
                         </span>
                     </div>
                     <div>
@@ -25,7 +25,7 @@ function HowToPlay()
                             Attack
                         </h3><br/>
                         <span className={styles.GuideText}>
-                            Press k to use your sword to attack
+                            Press A to use your sword to attack
                         </span>
                     </div>
                     <h2 align="center">Enemies</h2>
